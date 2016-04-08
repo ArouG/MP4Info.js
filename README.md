@@ -37,5 +37,5 @@
     http://aroug.eu/MP4Info/   (multiple + worker)       
 
 #Bugs :
-    FileReader() isn't supported by Firefox in WebWorkers :( but is OK with Opera, Chrome and IE : fixed with FileReaderSync !
-    Date() isn't supported by IE (NaN NaN and so on)    
+    FileReader() isn't supported by Firefox in WebWorkers :( but is OK with Opera, Chrome and IE) : fixed with FileReaderSync !
+    Date() isn't supported by IE (NaN NaN and so on) : fixed !! lastModified --> lastModifiedDate
