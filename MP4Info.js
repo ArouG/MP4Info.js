@@ -1,7 +1,8 @@
 /**
  * MP4Info 
- *
- * v 1.1   2016/04/08
+ * v 1.0   2016/04/07   bugs ReadFile en FF/WebWorker et date
+ * v 1.1   2016/04/08   bugs date
+ * v 1.2   2016/04/08   on sauve maintenant (ligne 36 LastModifiedDate)
  *
  *       Inspirations :
  *
@@ -32,7 +33,7 @@ var mp4 = function(opts, cb) {
         };
         info.filesize = opts.file.size;
         info.filename = opts.file.name;
-        info.filedate = opts.file.lastModified;
+        info.filedate = opts.file.lastModifiedDate;
     }
     for (var k in opts) {
         options[k] = opts[k];
