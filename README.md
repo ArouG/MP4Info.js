@@ -34,4 +34,8 @@
 	for multiple files and worker   : indexw.html
 
 #Try it ? 
-    http://aroug.eu/MP4Info/   (multiple + worker)      
+    http://aroug.eu/MP4Info/   (multiple + worker)       
+
+#Bugs :
+    FileReader() isn't supported by Firefox in WebWorkers :( but is OK with Opera, Chrome and IE
+    Date() isn't supported by IE (NaN NaN and so on)    
