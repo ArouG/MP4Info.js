@@ -1,7 +1,7 @@
 /**
  * MP4Info 
  *
- * v 1.0   2016/04/07
+ * v 1.1   2016/04/08
  *
  *       Inspirations :
  *
@@ -1119,15 +1119,20 @@ var mp4 = function(opts, cb) {
      * File API reader
      */
     Reader.prototype.readFile = function(length, position, callback) {
-        var slice = this.file.slice(position, position + length),
-            fr = new FileReader();
-        fr.onload = function(e) {
-            callback(null, e.target.result);
-        };
-        fr.onerror = function(e) {
-            callback('File read failed');
-        };
-        fr.readAsArrayBuffer(slice);
+    /*      OK in wekWorkers (OK for Chrome, Opera and IE) except Firefox  :
+    /*                       http://stackoverflow.com/questions/22741478/firefox-filereader-is-not-defined-only-when-called-from-web-worker     */    
+        if (typeof FileReader === 'undefined'){
+            var slice = this.file.slice(position, position + length),
+                fr=new FileReaderSync();
+            callback(null,fr.readAsArrayBuffer(slice));
+        } else {    
+            var slice = this.file.slice(position, position + length),
+               fr = new FileReader();
+            fr.onload = function(e) {
+                callback(null, e.target.result);
+            };
+            fr.readAsArrayBuffer(slice);
+        }
     };
     /*
      * Read the file
@@ -1157,6 +1162,8 @@ var mp4 = function(opts, cb) {
         });
     });
 }; // MP4Tag.parse ! ??
+
+
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = mp4;
