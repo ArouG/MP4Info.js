@@ -37,5 +37,5 @@
     http://aroug.eu/MP4Info/   (multiple + worker)       
 
 #Bugs :
-    FileReader() isn't supported by Firefox in WebWorkers :( but is OK with Opera, Chrome and IE) : fixed with FileReaderSync !
-    Date() isn't supported by IE (NaN NaN and so on) : fixed !! lastModified --> lastModifiedDate
+    This version use await/async so Microsoft Internet is forbiden ... but Edge run :-)
+    More : workers (multiple files) work now in kind of parallelism (not one after one)
