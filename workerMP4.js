@@ -1,4 +1,8 @@
-importScripts('MP4Info.js');
+importScripts('MP4Infomin.js');
+// seules petites evolutions :
+// prise en compte de l'indice du fichier transmis dans le message (lnum) pour pouvoir le retourner à l'appelant et
+// présentation du retour : suppression des lignes "more info" pour les Codecs Audio et Video
+// date : 2020/12/18
 
 
         function duree(s) {
@@ -136,7 +140,7 @@ importScripts('MP4Info.js');
                     info.text += "Width (on screen) : " + Math.ceil(info.tracks[i].Trackwidth) + "\n";
                     info.text += "Heidth (on screen) : " + Math.ceil(info.tracks[i].Trackheight) + "\n";
                     if (info.tracks[i].Entry) {
-                        info.text += "Codec Video more info :\n";
+                        //info.text += "Codec Video more info :\n";
                         if (info.tracks[i].Entry[0].Compressor) {
                             info.text += "Compressor : " + info.tracks[i].Entry[0].Compressor + "\n";
                         }
@@ -151,7 +155,7 @@ importScripts('MP4Info.js');
 
                 if (info.tracks[i].typeTrack == 'Audio') {
                     if (info.tracks[i].Entry) {
-                        info.text += "Codec Audio more info :\n";
+                        //info.text += "Codec Audio more info :\n";
                         if (info.tracks[i].Entry[0].Compressor) {
                             info.text += "Compressor : " + info.tracks[i].Entry[0].Compressor + "\n";
                         }
@@ -168,23 +172,28 @@ importScripts('MP4Info.js');
 
 onmessage = function(event) {
 
-  var file = event.data;
-    if (file.type == 'video/mp4'){ 
+  var file = event.data[0];
+  let lnum = event.data[1];
+  //let mp4regex = new RegExp("(.*?)\.(mp4|m4v)$");  
+
+    if ((file.type == 'video/mp4') || (file.type == 'video/m4v')){ 
         mp4(file, function(err, info) {
           if (err) {
-            console.log('error : ' + err);
+            //console.log('error : ' + err);
             postMessage({
-              'data' : 'error : ' + err
+              'data' : 'error : ' + err, 
+              'num' : lnum
             });
           } else {
             sortie_texte = human_reading(info);
             postMessage({
-              'data' : sortie_texte
+              'data' : sortie_texte,
+              'num' : lnum
             });
             //console.log(sortie_texte);
           }
         });
     } else {
-        postMessage({'data' : 'nop'});
+        postMessage({'data' : 'nop', 'num' : lnum});
     }    
   }
