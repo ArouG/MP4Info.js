@@ -25,7 +25,7 @@
             let currentBar = 0;
             let progressBar;
             let intervalId;
-            let timedeb, timeend;                                      // pour évaluation de l'efficacité
+            //let timedeb, timeend;                                      // pour évaluation de l'efficacité
 
             function change_ind(t) {
                 document.querySelector('#out').innerHTML = "";
@@ -75,7 +75,7 @@
                     let nbFichiers = fichiers.length;
                     let tmp = {};
 
-                    timedeb = Date.now();                                      // pour évaluation de l'efficacité
+                    //timedeb = Date.now();                                      // pour évaluation de l'efficacité
 
                     for (let k=0; k<nbFichiers; k++){
                         res.push('');
@@ -115,9 +115,9 @@
                                     document.querySelector('#out').innerHTML = "";
                                     document.querySelector('#out').innerHTML = res[0];
 
-                                    timeend = Date.now();                                      // pour évaluation de l'efficacité
-                                    let duration = timeend - timedeb;
-                                    alert('duration = '+duration);
+                                    //timeend = Date.now();                                      // pour évaluation de l'efficacité
+                                    //let duration = timeend - timedeb;
+                                    //alert('duration = '+duration);
 
                                 }
                         }, false);
