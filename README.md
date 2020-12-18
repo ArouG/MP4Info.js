@@ -30,8 +30,7 @@
 
 #Examples :
 	
-	for a single file and no worker : index.html
-	for multiple files and worker   : indexw.html
+	for multiple or single file and no worker : index.html
 
 #Try it ? 
     http://aroug.eu/MP4Info/   (multiple + worker)       
